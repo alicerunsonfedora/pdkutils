@@ -7,7 +7,7 @@
 
 import PlaydateKit
 
-/// An object used to measure an amount of work.
+/// An object used to measure how long it takes to perform an operation. 
 ///
 /// The Measurement object is generally used to manually profile a given amount of work. Results can be displayed in
 /// either seconds or milliseconds.
@@ -16,7 +16,7 @@ import PlaydateKit
 /// defer { someWorkTime.record() }
 /// ...
 /// ```
-/// ## Accumulating time
+/// ### Accumulating time
 /// Measurement can work under two modes: a single scoped iteration, and multiple iterations with accumulated time.
 /// To show an accumulated time over a certain amount of runs, use ``checkpoint()``:
 /// ```swift
@@ -27,6 +27,11 @@ import PlaydateKit
 ///    someWorkTime.checkpoint()
 /// }
 /// someWorkTime.record()
+/// ```
+///
+/// To display the times as an average rather than a total accumulation, enable `displayTimesAsAverages`:
+/// ```swift
+/// someWorkTime.record(displayTimesAsAverages: true)
 /// ```
 public class Measurement {
     public enum DurationPrecision {

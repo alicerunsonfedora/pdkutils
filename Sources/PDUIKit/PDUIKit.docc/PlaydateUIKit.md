@@ -7,13 +7,8 @@ PlaydateKit.
 
 **PDUIKit** is a complementary package that provides developers the
 tools needed to built consistent user interfaces for apps and games on the
-[Playdate](https://play.date) game console. It leverages the `PlaydateKit`
-library and is designed to have a similar feel to Apple's UIKit library
-for iOS, iPadOS, and tvOS.
-
-> Important: PlaydateUIKit is still a work in progress and is considered
-> pre-release software. APIs may change over time and are not
-> representative of the final shipping build. Use at your own risk!
+[Playdate](https://play.date) game console. It is designed to have a
+similar feel to Apple's UIKit library for iOS, iPadOS, and tvOS.
 
 ## Topics
 

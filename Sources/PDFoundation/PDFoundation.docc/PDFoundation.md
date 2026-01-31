@@ -2,6 +2,12 @@
 
 Access essential functionality to further enhance your Playdate app or game.
 
+## Overview
+
+PDFoundation extends the foundational capabilities of PlaydateKit and aims
+to provide an experience similar to that of the Foundation framework while
+leveraging the Playdate SDK.
+
 ## Topics
 
 ### File Access
@@ -18,9 +24,9 @@ Access essential functionality to further enhance your Playdate app or game.
 
 - ``OSLog``
 - ``PDReportDebug(_:displaysTimestamp:)``
-- ``PDReportWarning(_:displaysTimestamp:)``
-- ``PDReportError(_:displaysTimestamp:)``
-- ``PDReportFatalError(_:displaysTimestamp:)``
+- ``PDReportWarning(_:displayTimestamp:)``
+- ``PDReportError(_:displayTimestamp:)``
+- ``PDReportFatalError(_:displayTimestamp:)``
 
 ### Measuring Performance
 
