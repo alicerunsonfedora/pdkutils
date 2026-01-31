@@ -1,4 +1,5 @@
 import PlaydateKit
+import PDFoundation
 
 /// A structure that represents a font from a bundle's resources.
 public struct UIFont {
@@ -38,26 +39,26 @@ public struct UIFont {
     /// - Parameter size: The size of the font in points.
     /// - Parameter weight: The font's weight.
     public init(named name: String, size: Int, weight: Weight = .regular) {
+        let fontResource = [name, weight.resourceSuffix, String(size)].joined(separator: "-")
         fontName = name
         fontSize = size
         fontWeight = weight
         do {
-            pdFont = try Graphics.Font(path: "Resources/Fonts/\(name)-\(weight.resourceSuffix)-\(size)")
+            pdFont = try Bundle.main.font(forResourceNamed: fontResource)
         } catch {
-            print("Failed to instantiate font: \(error)")
+            PDReportError("Failed to instantiate font: \(error)")
         }
     }
 
     init(systemFontSize: Int, systemFontWeight: Weight) {
+        let fontResource = ["Roobert", systemFontWeight.resourceSuffix, String(systemFontSize)].joined(separator: "-")
         fontName = "UISystemFont"
         fontSize = systemFontSize
         fontWeight = systemFontWeight
-
         do {
-            pdFont = try Graphics.Font(
-                path: "PlaydateUIKit_Resources/Fonts/Roobert-\(systemFontWeight.resourceSuffix)-\(systemFontSize)")
+            pdFont = try Bundle.uiKit.font(forResourceNamed: fontResource)
         } catch {
-            print("Failed to instantiate system font: \(error)")
+            PDReportFatalError("Failed to instantiate system font: \(error)")
         }
     }
 }

@@ -24,7 +24,7 @@ public class UIImage {
     /// - Parameter name: The name of the image as it exists in `Resources/Images`.
     public init(name: String) {
         self.name = name
-        self.pdBitmap = try? Graphics.Bitmap(path: "Resources/Images/\(name)")
+        self.pdBitmap = try? Bundle.main.image(forResourceNamed: name)
     }
 
     /// Construct an image from a symbol name according to a specified text style.
@@ -39,7 +39,7 @@ public class UIImage {
         }
 
         guard let symbolTable = try? Graphics.BitmapTable(
-            path: "PlaydateUIKit_Resources/Fonts/UISymbols-Regular-\(textStyle.preferredFontSize)") else {
+            path: "PDUIKit.pdbundle/Resources/Fonts/UISymbols-Regular-\(textStyle.preferredFontSize)") else {
             return
         }
         self.pdBitmap = symbolTable.bitmap(at: idx)?.copy()
