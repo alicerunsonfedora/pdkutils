@@ -12,8 +12,7 @@ leveraging the Playdate SDK.
 
 ### File Access
 
-- ``PDFile``
-- ``Bundle``
+- <doc:FileAccess>
 
 ### Dates
 

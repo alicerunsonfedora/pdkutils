@@ -24,6 +24,7 @@ extension PDFile {
 
 extension File {
     /// Returns whether a file exists at the specified path and has a non-zero amount of bytes.
+    /// - Parameter path: The path containing the file to validate.
     public static func fileExists(at path: String) -> Bool {
         do {
             let stat = try File.stat(path: path)
@@ -34,19 +35,19 @@ extension File {
     }
 }
 
-extension PDFile {
+public extension PDFile {
     /// Reads the next set of bytes and casts it to the specified type.
     /// - Parameter decodedType: The type to cast the bytes into.
     /// - Parameter value: The value to write the data into.
-    public func read<T>(as decodedType: T.Type, into value: inout T) {
+    func read<T>(as decodedType: T.Type, into value: inout T) {
         withUnsafeMutablePointer(to: &value) { ptr in
             _ = self.readOrSilentlyFail(buffer: ptr, length: UInt32(MemoryLayout<T>.size))
         }
     }
 
     /// Reads the next specified number of bytes as a String.
-    /// - Parameter length: The number of bytes to interpret as a string.
-    public func readString(ofLength bytes: Int) -> String {
+    /// - Parameter bytes: The number of bytes to interpret as a string.
+    func readString(ofLength bytes: Int) -> String {
         let strPointer = UnsafeMutableRawPointer.allocate(
             byteCount: bytes, alignment: MemoryLayout<CChar>.alignment)
         do {
@@ -61,12 +62,17 @@ extension PDFile {
 }
 
 extension String {
+    /// Initialize a string by reading data from a file as UTF-8.
+    /// - Parameter file: The file to read the string contents from.
+    /// - Parameter length: The number of bytes to read as a string.
     public init(reading file: PDFile, ofLength length: Int) {
         self = file.readString(ofLength: length)
     }
 }
 
 extension Character {
+    /// Initialize a character by reading data from a file as UTF-8.
+    /// - Parameter file: The file to read the character from.
     public init?(reading file: PDFile) {
         let text = file.readString(ofLength: 1)
         guard let char = text.first else { return nil }
@@ -75,6 +81,8 @@ extension Character {
 }
 
 extension FixedWidthInteger {
+    /// Initialize an integer value by reading data from a file.
+    /// - Parameter file: The file to read the integer value from.
     public init(reading file: PDFile) {
         self = .min
         file.read(as: Self.self, into: &self)
@@ -82,6 +90,8 @@ extension FixedWidthInteger {
 }
 
 extension FloatingPoint {
+    /// Initialize a floating point value by reading data from a file.
+    /// - Parameter file: The file to read the floating point value from.
     public init(reading file: PDFile) {
         self = .nan
         file.read(as: Self.self, into: &self)
@@ -89,6 +99,8 @@ extension FloatingPoint {
 }
 
 extension Bool {
+    /// Initialize a boolean value by reading data from a file.
+    /// - Parameter file: THe file to read the floating point value from.
     public init(reading file: PDFile) {
         self = false
         file.read(as: Bool.self, into: &self)
