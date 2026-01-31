@@ -1,0 +1,33 @@
+{
+  "originHash" : "a1bbd8aa8ad907f88d2181040fd00ab076139b295ebebc30d4feee55b636ff7c",
+  "pins" : [
+    {
+      "identity" : "playdatekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "9f23ec625b51089b0744f5c0a9cfddd95937c8e7"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax.git",
+      "state" : {
+        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
+        "version" : "601.0.1"
+      }
+    },
+    {
+      "identity" : "utf8viewextensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/strawdynamics/UTF8ViewExtensions.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "babf8b80cff1dba41678ececccd3dc711bb9a975"
+      }
+    }
+  ],
+  "version" : 3
+}

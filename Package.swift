@@ -9,13 +9,23 @@ let package = Package(
     products: [
         .library(name: "PDFoundation", targets: ["PDFoundation"]),
         .library(name: "PDGraphics", targets: ["PDGraphics", "PDFoundation"]),
+        .library(name: "PDUIKit", targets: ["PDUIKit", "PDGraphics", "PDFoundation"]),
     ],
     dependencies: [
-        .package(url: "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git", branch: "main")
+        .package(url: "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git", branch: "main"),
+        .package(url: "https://github.com/strawdynamics/UTF8ViewExtensions.git", branch: "main"),
     ],
     targets: [
         .pdTarget(name: "PDFoundation"),
-        .pdTarget(name: "PDGraphics", dependencies: ["PDFoundation"])
+        .pdTarget(name: "PDGraphics", dependencies: ["PDFoundation"]),
+        .pdTarget(
+            name: "PDUIKit",
+            dependencies: [
+                "PDFoundation", "PDGraphics",
+                .product(name: "UTF8ViewExtensions", package: "UTF8ViewExtensions")
+            ],
+            exclude: ["Resources"]
+        ),
     ]
 )
 
@@ -23,6 +33,7 @@ extension Target {
     static func pdTarget(
         name: String,
         dependencies: [Target.Dependency] = [],
+        exclude: [String] = [],
         swiftSettings: [SwiftSetting] = [],
         cSettings: [CSetting] = []
     ) -> Target {
@@ -46,6 +57,7 @@ extension Target {
         return .target(
             name: name,
             dependencies: defaultDepends + dependencies,
+            exclude: exclude,
             cSettings: cSettings,
             swiftSettings: defaultSettings + swiftSettings
         )
