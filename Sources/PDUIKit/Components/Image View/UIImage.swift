@@ -1,4 +1,5 @@
 import PlaydateKit
+import PDFoundation
 
 /// An object that represents a drawable image.
 public class UIImage {

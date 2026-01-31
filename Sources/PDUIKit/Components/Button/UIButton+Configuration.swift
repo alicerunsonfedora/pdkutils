@@ -1,3 +1,5 @@
+import PlaydateKit
+
 extension UIButton {
     struct ButtonModelConfig {
         var text: String?

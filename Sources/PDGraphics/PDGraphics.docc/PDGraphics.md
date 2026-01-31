@@ -43,5 +43,5 @@ and will skip additional checks for XOR.
 - ``PGBounds``
 - ``PGTriangle``
 - ``PGFillRect(_:color:)``
-- ``PDFillTriangle(_:color:)``
-- ``PDFillTriangle(_:color:into:)``
+- ``PGFillTriangle(_:color:)``
+- ``PGFillTriangle(_:color:into:)``

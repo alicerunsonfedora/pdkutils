@@ -1,5 +1,5 @@
 {
-  "originHash" : "dbc3cd0eadb44017c3551b8d980764f5096c89340a90c3ca111509f4298a6ae8",
+  "originHash" : "095807c10f09c2f3b7f6f9c2548e3cc1fc06f2716974bad56a2f69a14b628478",
   "pins" : [
     {
       "identity" : "playdatekit",
@@ -8,15 +8,6 @@
       "state" : {
         "branch" : "main",
         "revision" : "485b25329a2552222d15564ecb68a4eeb3d901b7"
-      }
-    },
-    {
-      "identity" : "utf8viewextensions",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/strawdynamics/UTF8ViewExtensions.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "babf8b80cff1dba41678ececccd3dc711bb9a975"
       }
     }
   ],

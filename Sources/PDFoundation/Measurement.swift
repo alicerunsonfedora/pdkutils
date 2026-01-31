@@ -132,9 +132,9 @@ public class Measurement {
     private func reportToConsole(time: Float, suffix: String) {
         switch outputFormat {
         case .prettyPrinted:
-            print("Work for '\(description)' took: \(time, precision: 5)\(suffix)")
+            print("Work for '\(description)' took: \(time)\(suffix)")
         case .tsv:
-            print("\(description)\t\(time, precision: 5)")
+            print("\(description)\t\(time)")
         }
     }
 }

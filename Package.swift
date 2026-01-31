@@ -22,18 +22,14 @@ let package = Package(
         .trait(name: "PDGraphicsXOR")
     ],
     dependencies: [
-        .package(url: "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git", branch: "main"),
-        .package(url: "https://github.com/strawdynamics/UTF8ViewExtensions.git", branch: "main"),
+        .package(url: "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git", branch: "main")
     ],
     targets: [
         .pdTarget(name: "PDFoundation"),
         .pdTarget(name: "PDGraphics", dependencies: ["PDFoundation"]),
         .pdTarget(
             name: "PDUIKit",
-            dependencies: [
-                "PDFoundation", "PDGraphics",
-                .product(name: "UTF8ViewExtensions", package: "UTF8ViewExtensions")
-            ],
+            dependencies: ["PDFoundation", "PDGraphics"],
             exclude: ["Resources"]
         ),
     ]

@@ -29,16 +29,4 @@ extension ViewController: UIControlDelegate {
     }
 }
 
-@PlaydateMain
-final class Game: PlaydateGame {
-    let rootViewController: UIViewController
 
-    init() {
-        self.rootViewController = ViewController()
-    }
-
-    func update() -> Bool {
-        rootViewController.update()
-        return true
-    }
-}

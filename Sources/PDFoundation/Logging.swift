@@ -85,7 +85,7 @@ public func PDReportDebug(_ message: String, displaysTimestamp: Bool = true) {
 
 /// Quickly log a warning message to the console.
 /// - Parameter message: The message to log.
-/// - Parameter displaysTimestamp: Whether the timestamp should be displayed in the log message.
+/// - Parameter displayTimestamp: Whether the timestamp should be displayed in the log message.
 public func PDReportWarning(_ message: String, displayTimestamp: Bool = true) {
     guard displayTimestamp else {
         System.log("[WARN]: \(message)")
@@ -97,7 +97,7 @@ public func PDReportWarning(_ message: String, displayTimestamp: Bool = true) {
 
 /// Quickly log an error message to the console.
 /// - Parameter message: The message to log.
-/// - Parameter displaysTimestamp: Whether the timestamp should be displayed in the log message.
+/// - Parameter displayTimestamp: Whether the timestamp should be displayed in the log message.
 public func PDReportError(_ message: String, displayTimestamp: Bool = true) {
     guard displayTimestamp else {
         System.log("[ERR]: \(message)")
@@ -109,7 +109,7 @@ public func PDReportError(_ message: String, displayTimestamp: Bool = true) {
 
 /// Quickly log a fatal error message to the console.
 /// - Parameter message: The message to log.
-/// - Parameter displaysTimestamp: Whether the timestamp should be displayed in the log message.
+/// - Parameter displayTimestamp: Whether the timestamp should be displayed in the log message.
 public func PDReportFatalError(_ message: String, displayTimestamp: Bool = true) {
     guard displayTimestamp else {
         System.error("[FATAL]: \(message)")
