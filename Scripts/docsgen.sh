@@ -23,6 +23,6 @@ $(xcrun -f docc -toolchain "swift latest") process-archive \
   --hosting-base-path . \
   --output-path docs;
 
-echo "<script>window.location.href += \"/documentation/overview\"</script>" > docs/index.html;
+echo "<script>window.location.href += \"/documentation\"</script>" > docs/index.html;
 
 rm -rf /tmp/derivedData /tmp/docc

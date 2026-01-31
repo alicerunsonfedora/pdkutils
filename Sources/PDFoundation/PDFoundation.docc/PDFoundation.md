@@ -17,10 +17,10 @@ Access essential functionality to further enhance your Playdate app or game.
 ### Logging
 
 - ``OSLog``
-- ``PDReportDebug``
-- ``PDReportWarning``
-- ``PDReportError``
-- ``PDReportFatalError``
+- ``PDReportDebug(_:displaysTimestamp:)``
+- ``PDReportWarning(_:displaysTimestamp:)``
+- ``PDReportError(_:displaysTimestamp:)``
+- ``PDReportFatalError(_:displaysTimestamp:)``
 
 ### Measuring Performance
 
