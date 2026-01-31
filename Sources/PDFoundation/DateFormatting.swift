@@ -10,6 +10,7 @@ import PlaydateKit
 public typealias Date = System.DateTime
 
 extension Date {
+    /// Create a date object based on the number of seconds since the Playdate epoch.
     public init(secondsSinceEpoch epoch: UInt32) {
         self = System.convertEpochToDateTime(epoch)
     }

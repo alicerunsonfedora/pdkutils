@@ -1,4 +1,5 @@
 import PlaydateKit
+import PDGraphics
 
 /// An object responsible for drawing graphical elements onto the Playdate's screen.
 open class UIView: UIFocusElement {
@@ -122,7 +123,7 @@ open class UIView: UIFocusElement {
     open func draw() {
         if isHidden { return }
         if Graphics.drawMode != .copy { Graphics.drawMode = .copy }
-        Graphics.fillRect(frame.pdRect, color: backgroundColor)
+        PGFillRect(frame.pdRect, color: backgroundColor)
         for subview in subviews {
             Graphics.drawMode = .copy
             subview.draw()
