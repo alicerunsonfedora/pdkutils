@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-mkdir -p /tmp/derivedData /tmp/docc /tmp/symbols
+mkdir -p /tmp/derivedData /tmp/docc
 
 xcodebuild docbuild -scheme PDUIKit \
   -configuration Release \
@@ -13,11 +13,7 @@ xcodebuild docbuild -scheme PDUIKit \
   -skipPackagePluginValidation \
   -skipMacroValidation;
 
-echo "Copying symbols..."
-cp -r /tmp/derivedData/Build/Intermediates.noindex/*.build/Release/*.build/symbol-graph/ /tmp/symbols
-rm -rf /tmp/symbols/swift* /tmp/symbols/playdatekit /tmp/symbols/utf8viewextensions
-
-xcrun docc merge /tmp/docc/PDKUtils.doccarchive $(find /tmp/derivedData -type d -name 'PD*.doccarchive') \
+xcrun docc merge $(find /tmp/derivedData -type d -name 'PD*.doccarchive') \
   --synthesized-landing-page-name PDKUtils \
   --synthesized-landing-page-kind SDK \
   --output-path /tmp/docc/PDKUtils.doccarchive
@@ -29,4 +25,4 @@ $(xcrun -f docc -toolchain "swift latest") process-archive \
 
 echo "<script>window.location.href += \"/documentation/overview\"</script>" > docs/index.html;
 
-rm -rf /tmp/derivedData /tmp/docc /tmp/symbols
+rm -rf /tmp/derivedData /tmp/docc
