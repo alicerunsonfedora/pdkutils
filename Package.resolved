@@ -1,5 +1,5 @@
 {
-  "originHash" : "0d3d3145d503feb52bb41eca3fe451de9b0de3a7d66ff1088e1b739d54cf7cee",
+  "originHash" : "dbc3cd0eadb44017c3551b8d980764f5096c89340a90c3ca111509f4298a6ae8",
   "pins" : [
     {
       "identity" : "playdatekit",
@@ -7,34 +7,7 @@
       "location" : "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "9f23ec625b51089b0744f5c0a9cfddd95937c8e7"
-      }
-    },
-    {
-      "identity" : "swift-docc-plugin",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-docc-plugin",
-      "state" : {
-        "revision" : "3e4f133a77e644a5812911a0513aeb7288b07d06",
-        "version" : "1.4.5"
-      }
-    },
-    {
-      "identity" : "swift-docc-symbolkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-docc-symbolkit",
-      "state" : {
-        "revision" : "b45d1f2ed151d057b54504d653e0da5552844e34",
-        "version" : "1.0.0"
-      }
-    },
-    {
-      "identity" : "swift-syntax",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/swiftlang/swift-syntax.git",
-      "state" : {
-        "revision" : "f99ae8aa18f0cf0d53481901f88a0991dc3bd4a2",
-        "version" : "601.0.1"
+        "revision" : "485b25329a2552222d15564ecb68a4eeb3d901b7"
       }
     },
     {
