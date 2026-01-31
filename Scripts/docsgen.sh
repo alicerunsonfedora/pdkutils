@@ -18,12 +18,17 @@ cp -r /tmp/derivedData/Build/Intermediates.noindex/*.build/Release/*.build/symbo
 rm -rf /tmp/symbols/swift* /tmp/symbols/playdatekit /tmp/symbols/utf8viewextensions
 
 xcrun docc convert "./PDKUtils.docc" \
-  --output-dir /tmp/docc/PDUIKit.doccarchive \
+  --output-dir /tmp/docc/PDKUtils_Glue.doccarchive \
   --additional-symbol-graph-dir /tmp/symbols
 
+xcrun docc merge /tmp/docc/PDKUtils.doccarchive $(find /tmp/derivedData -type d -name 'PD*.doccarchive') \
+  --output-path /tmp/docc/PDKUtils.doccarchive
+
 $(xcrun -f docc -toolchain "swift latest") process-archive \
-  transform-for-static-hosting /tmp/docc/PDUIKit.doccarchive \
+  transform-for-static-hosting /tmp/docc/PDKUtils.doccarchive \
   --hosting-base-path . \
   --output-path docs;
 
 echo "<script>window.location.href += \"/documentation/overview\"</script>" > docs/index.html;
+
+rm -rf /tmp/derivedData /tmp/docc /tmp/symbols
