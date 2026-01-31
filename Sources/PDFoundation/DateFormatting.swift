@@ -7,6 +7,7 @@
 
 import PlaydateKit
 
+/// A structure representing a point in time.
 public typealias Date = System.DateTime
 
 extension Date {
