@@ -31,9 +31,11 @@ public typealias PGColor = Graphics.Color
 /// byte of the row.
 public typealias PGBuffer = UnsafeMutablePointer<UInt8>
 
-enum PGPatternApplyMode {
-    case copy, xor
-}
+#if PDGraphicsXOR
+    enum PGPatternApplyMode {
+        case copy, xor
+    }
+#endif
 
 // swiftlint:disable cyclomatic_complexity function_body_length
 
@@ -69,15 +71,22 @@ public func PGDrawScanline(_ x0: Int, _ x1: Int, y: Int, color: PGColor = .black
     let patternRowIndex = y % 8
     var pattern: UInt8 = 0
     var patternBitmask: UInt8 = 255
-    var patternMode: PGPatternApplyMode = .copy
+    #if PDGraphicsXOR
+        var patternMode: PGPatternApplyMode = .copy
+    #endif
 
     switch color {
     case .solid(.white), .solid(.clear):
         pattern = 255
-    case .solid(.black):
-        break
-    case .solid(.xor):
-        patternMode = .xor
+    #if PDGraphicsXOR
+        case .solid(.black):
+            break
+        case .solid(.xor):
+            patternMode = .xor
+    #else
+        case .solid(.black), .solid(.xor):
+            break
+    #endif
     case .pattern(let bitmap, let mask):
         pattern = PGGetBitPatternRow(bitmap, row: patternRowIndex)
         patternBitmask = PGGetBitPatternRow(mask, row: patternRowIndex)
@@ -98,13 +107,18 @@ public func PGDrawScanline(_ x0: Int, _ x1: Int, y: Int, color: PGColor = .black
         bitmask &= patternBitmask
 
         let trimmedPattern = bitmask & pattern
-        switch patternMode {
-        case .copy:
+        #if PDGraphicsXOR
+            switch patternMode {
+            case .copy:
+                strip &= ~bitmask
+                strip = strip | trimmedPattern
+            case .xor:
+                strip = strip ^ trimmedPattern
+            }
+        #else
             strip &= ~bitmask
             strip = strip | trimmedPattern
-        case .xor:
-            strip = strip ^ trimmedPattern
-        }
+        #endif
         frameBuffer[x + row] = strip
     }
 }

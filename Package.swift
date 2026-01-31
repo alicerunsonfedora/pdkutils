@@ -17,6 +17,10 @@ let package = Package(
         .library(name: "PDGraphics", targets: ["PDGraphics", "PDFoundation"]),
         .library(name: "PDUIKit", targets: ["PDUIKit", "PDGraphics", "PDFoundation"]),
     ],
+    traits: [
+        .default(enabledTraits: ["PDGraphicsXOR"]),
+        .trait(name: "PDGraphicsXOR")
+    ],
     dependencies: [
         .package(url: "https://source.marquiskurt.net/PDUniverse/PlaydateKit.git", branch: "main"),
         .package(url: "https://github.com/strawdynamics/UTF8ViewExtensions.git", branch: "main"),
