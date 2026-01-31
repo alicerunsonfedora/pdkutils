@@ -68,5 +68,5 @@ For more information on your rights, refer to LICENSE.txt.
 
 PDKUtils is made possible thanks to the following open source projects:
 
-- [PlaydateKit](https://github.com/finvoor/PlaydateKit) - MIT License
+- [PlaydateKit](https://github.com/finnvoor/PlaydateKit) - MIT License
 - [Roobert](https://sdk.play.date/3.0.1/Inside%20Playdate.html#_legal_information) - Panic Inc, CC BY 4.0 
