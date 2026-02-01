@@ -41,6 +41,7 @@ and will skip additional checks for XOR.
 
 - ``PGColor``
 - ``BitPattern``
+- ``PGBayerPatternCache``
 - ``PGPatternMaskAlwaysDraw``
 - ``PGPatternMaskNeverDraw``
 
