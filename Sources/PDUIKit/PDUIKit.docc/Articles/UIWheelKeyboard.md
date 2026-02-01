@@ -1,4 +1,4 @@
-# ``PlaydateUIKit/UIWheelKeyboard``
+# ``PDUIKit/UIWheelKeyboard``
 
 ## Overview
 

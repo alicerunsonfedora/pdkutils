@@ -1,4 +1,4 @@
-# ``PlaydateUIKit/UILabel``
+# ``PDUIKit/UILabel``
 
 ## Topics
 

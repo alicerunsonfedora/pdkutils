@@ -1,4 +1,4 @@
-# ``PlaydateUIKit/UIImageView``
+# ``PDUIKit/UIImageView``
 
 ## Topics
 
