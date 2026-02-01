@@ -9,8 +9,6 @@ public class UIImage {
     /// this corresponds to the symbol's name.
     public var name: String
 
-    var drawMode: Graphics.Bitmap.DrawMode = .copy
-
     /// The intrinsic content size of the image.
     public var contentIntrinsicSize: UISize {
         guard let pdBitmap else { return .zero }
@@ -18,13 +16,15 @@ public class UIImage {
         return UISize(width: Float(data.width), height: Float(data.height))
     }
 
+    var drawMode: Graphics.Bitmap.DrawMode = .copy
     var pdBitmap: Graphics.Bitmap?
 
     /// Construct an image of a given name.
-    /// - Parameter name: The name of the image as it exists in `Resources/Images`.
-    public init(name: String) {
+    /// - Parameter name: The name of the image as it exists in the specified bundle.
+    /// - Parameter bundle: The bundle containing the image resource to display.
+    public init(name: String, bundle: Bundle = .main) {
         self.name = name
-        self.pdBitmap = try? Bundle.main.image(forResourceNamed: name)
+        self.pdBitmap = try? bundle.image(forResourceNamed: name)
     }
 
     /// Construct an image from a symbol name according to a specified text style.
@@ -50,6 +50,7 @@ public class UIImage {
         self.pdBitmap = bitmap
     }
 
+    /// Inverts the colors of the presented image.
     public func inverted() -> UIImage {
         let image = UIImage(name: self.name, bitmap: self.pdBitmap?.copy())
         image.drawMode = .inverted
