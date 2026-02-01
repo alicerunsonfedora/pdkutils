@@ -32,20 +32,16 @@ public extension PGColor {
         let threshold = UInt8((1 - lightness) * 64)
         for row in 0..<8 {
             for col in 0..<8 {
-                PGApplyBayerPattern(&pattern, row: row, col: col, threshold: threshold)
+                if bayerPattern[row][col] >= threshold {
+                    pattern[row] |= (1 << col)
+                } else {
+                    pattern[row] &= ~(1 << col)
+                }
             }
         }
         return .pattern(
             (pattern[0], pattern[1], pattern[2], pattern[3], pattern[4], pattern[5], pattern[6], pattern[7]),
             mask: PGPatternMaskAlwaysDraw
         )
-    }
-}
-
-func PGApplyBayerPattern(_ pattern: inout [UInt8], row: Int, col: Int, threshold: UInt8) {
-    if bayerPattern[row][col] >= threshold {
-        pattern[row] |= (1 << col)
-    } else {
-        pattern[row] &= ~(1 << col)
     }
 }
