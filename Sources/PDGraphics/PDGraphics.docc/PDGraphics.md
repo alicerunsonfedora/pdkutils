@@ -35,13 +35,27 @@ and will skip additional checks for XOR.
 ### Working with the frame buffer
 
 - ``PGBuffer``
-- ``PGColor``
 - ``PGDrawScanline(_:_:y:color:into:)``
+
+### Colors and patterns
+
+- ``PGColor``
+- ``BitPattern``
+- ``PGPatternMaskAlwaysDraw``
+- ``PGPatternMaskNeverDraw``
 
 ### Shapes
 
 - ``PGBounds``
 - ``PGTriangle``
+
+### Displaying rectangles
+
 - ``PGFillRect(_:color:)``
+- ``PGFillRect(_:color:into:)``
+- ``PGClipRectToBounds(_:)``
+
+### Displaying triangles
+
 - ``PGFillTriangle(_:color:)``
 - ``PGFillTriangle(_:color:into:)``

@@ -20,7 +20,7 @@ public func PGFillRect(_ rect: Rect, color: PGColor = .black) {
 /// - Parameter rect: The rectangle defining the region of the screen to fill with a color.
 /// - Parameter color: The color to fill the region with.
 /// - Parameter frameBuffer: The frame buffer to draw the rectangle into.
-func PGFillRect(_ rect: Rect, color: PGColor = .black, into frameBuffer: inout PGBuffer) {
+public func PGFillRect(_ rect: Rect, color: PGColor = .black, into frameBuffer: inout PGBuffer) {
     guard rect.width > 0, rect.height > 0 else { return }
     let bounds = PGClipRectToBounds(rect)
 

@@ -8,7 +8,7 @@
 // swiftlint:disable large_tuple
 
 /// A typealias representing a pattern of bits.
-typealias BitPattern = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
+public typealias BitPattern = (UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8, UInt8)
 
 /// Retrieves the row for a specified 8x8 bit pattern.
 /// - Parameter bitmap: The bit pattern to retrieve the current row for.
