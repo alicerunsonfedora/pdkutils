@@ -9,22 +9,51 @@
 // Embedded Swift for varying reasons. So, we need to redirect the content to use the UTF-8 view instead of the raw
 // content.
 
-public extension String {
+extension String: @retroactive Equatable, Hashable {
     /// Whether the string has no content.
-    var isEmpty: Bool { utf8.isEmpty }
+    public var isEmpty: Bool { utf8.isEmpty }
 
-    static func == (lhs: Self, rhs: Self) -> Bool {
+    /// Whether the string has any content.
+    public var isNotEmpty: Bool { !isEmpty }
+
+    public func equals(_ other: String) -> Bool {
+        return self.utf8.elementsEqual(other.utf8)
+    }
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.utf8.elementsEqual(rhs.utf8)
     }
 
-    func equals(_ other: String) -> Bool {
-        return self.utf8.elementsEqual(other.utf8)
+    public static func ~= (lhs: Self, rhs: Self) -> Bool {
+        lhs == rhs
+    }
+
+    public func hasPrefix(_ prefix: Self) -> Bool {
+        self.utf8.starts(with: prefix.utf8)
+    }
+
+    public func hasSuffix(_ suffix: Self) -> Bool {
+        guard suffix.utf8.count <= self.utf8.count else { return false }
+        return self.utf8.dropFirst(self.utf8.count - suffix.utf8.count).elementsEqual(suffix.utf8)
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(0xFF as UInt8)
+        for element in self.utf8 {
+            hasher.combine(element)
+        }
+    }
+
+    public var hashValue: Int {
+        var hasher = Hasher()
+        self.hash(into: &hasher)
+        return hasher.finalize()
     }
 
     /// Returns a copy of the string, removing the last character.
     ///
     /// If the string failed to drop the last character, it returns itself.
-    func droppingLastCharacter() -> Self {
+    public func droppingLastCharacter() -> Self {
         return self.droppingLast(k: 1)
     }
 
@@ -32,7 +61,7 @@ public extension String {
     ///
     /// If the string failed to drop the last character, it returns itself.
     /// - Parameter k: The number of characters to drop.
-    func droppingLast(k characters: Int) -> Self {
+    public func droppingLast(k characters: Int) -> Self {
         if isEmpty { return self }
         let utf8View = self.utf8
         let substring = utf8View.dropLast(characters)
