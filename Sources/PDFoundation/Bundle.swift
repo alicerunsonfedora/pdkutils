@@ -17,30 +17,7 @@ public enum BundleAccessError: Error {
 }
 
 /// An object that represents a game's bundle.
-public class Bundle {
-    /// An enumeration of the available resource types in a bundle.
-    ///
-    /// Resource types have standard bundle paths and can be interpreted by consumers by any means necessary. The
-    /// ``Bundle`` class provides common implementations for accessing these resource types
-    /// (see: <doc:Bundle#Accessing-bundle-resources>). Not all bundles require every resource type in this enumeration
-    /// to be available.
-    public enum ResourceType {
-        /// The resource type for 3D models.
-        case model
-
-        /// The resource type for 3D scenes.
-        case scene
-
-        /// The resource type for images.
-        case image
-
-        /// The resource type for bitmap fonts.
-        case font
-
-        /// The resource type for sounds.
-        case sound
-    }
-
+public final class Bundle {
     var resourcesBase: String
 
     /// Create a bundle relative to a given path for a specific name.
@@ -69,7 +46,7 @@ public class Bundle {
     /// Retrieve the file system path for a given resource in the bundle.
     /// - Parameter resource: The name of the resource to locate.
     /// - Parameter resourceType: The type of resource to locate.
-    public func path(forResource resource: String, ofType resourceType: ResourceType) -> String? {
+    public func path(forResource resource: String, ofType resourceType: some BundleResourceType) -> String? {
         let resPath = resourcesBase + resourceType.subpath(name: resource)
         if !resourceType.requiresFileExtension {
             return resPath
@@ -117,29 +94,3 @@ extension Bundle {
 }
 
 // swiftlint:enable discouraged_direct_init
-
-extension Bundle.ResourceType {
-    func subpath(name: String) -> String {
-        switch self {
-        case .model:
-            "/Models/\(name).model"
-        case .scene:
-            "/Scenes/\(name).pdscene"
-        case .image:
-            "/Images/\(name)"
-        case .font:
-            "/Fonts/\(name)"
-        case .sound:
-            "/Sounds/\(name)"
-        }
-    }
-
-    var requiresFileExtension: Bool {
-        switch self {
-        case .model, .scene:
-            return true
-        case .image, .font, .sound:
-            return false
-        }
-    }
-}

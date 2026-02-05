@@ -54,7 +54,10 @@ buildNumber=1
 ### Accessing bundle resources
 
 - ``path(forResource:ofType:)``
+- ``BundleResourceType``
+- ``BundleAccessError``
+
+### Standard bundle resources
+
 - ``font(forResourceNamed:)``
 - ``image(forResourceNamed:)``
-- ``ResourceType``
-- ``BundleAccessError``
