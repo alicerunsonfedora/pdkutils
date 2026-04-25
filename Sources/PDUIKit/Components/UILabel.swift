@@ -1,3 +1,4 @@
+import PDFoundation
 import PlaydateKit
 
 /// A view that displays a piece of text in a frame.
@@ -65,6 +66,19 @@ open class UILabel: UIView {
         }
 
         if isMultiline {
+            if frame.size == .zero {
+                PDReportWarning(
+                    """
+                    Attempting to draw a multiline label with an empty frame! This might be caused by an invalid frame
+                    size, or the label was intended to be drawn as a single line.
+
+                    Text: \(text)
+                    Is Multiline: \(isMultiline)
+                    Font: \(font?.fontName ?? "nil")
+                    Frame: (\(frame.origin.x), \(frame.origin.y) @ \(frame.size.width)x\(frame.size.height))
+                    """
+                )
+            }
             Graphics.drawTextInRect(
                 text, in: frame.pdRect, aligned: Graphics.TextAlignment(uiHorizontalAlignment: textAlignment))
             return
