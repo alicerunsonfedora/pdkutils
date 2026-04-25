@@ -35,11 +35,11 @@ extension File {
     }
 }
 
-public extension PDFile {
+extension PDFile {
     /// Reads the next set of bytes and casts it to the specified type.
     /// - Parameter decodedType: The type to cast the bytes into.
     /// - Parameter value: The value to write the data into.
-    func read<T>(as decodedType: T.Type, into value: inout T) {
+    public func read<T>(as decodedType: T.Type, into value: inout T) {
         withUnsafeMutablePointer(to: &value) { ptr in
             _ = self.readOrSilentlyFail(buffer: ptr, length: UInt32(MemoryLayout<T>.size))
         }
@@ -47,7 +47,7 @@ public extension PDFile {
 
     /// Reads the next specified number of bytes as a String.
     /// - Parameter bytes: The number of bytes to interpret as a string.
-    func readString(ofLength bytes: Int) -> String {
+    public func readString(ofLength bytes: Int) -> String {
         let strPointer = UnsafeMutableRawPointer.allocate(
             byteCount: bytes, alignment: MemoryLayout<CChar>.alignment)
         do {
@@ -67,6 +67,14 @@ extension String {
     /// - Parameter length: The number of bytes to read as a string.
     public init(reading file: PDFile, ofLength length: Int) {
         self = file.readString(ofLength: length)
+    }
+
+    /// Initialize a string by reading an entire file as a UTF-8 string.
+    /// - Parameter filePath: The path to the file to read.
+    public init(contentsOf filePath: String) throws(Playdate.Error) {
+        let fileStats = try File.stat(path: filePath)
+        let file = try File.open(path: filePath, mode: .read)
+        self.init(reading: file, ofLength: Int(fileStats.size))
     }
 }
 
