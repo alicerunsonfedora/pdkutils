@@ -19,6 +19,11 @@ open class UILabel: UIView {
     open var font: UIFont? = .preferredSystemFont(for: .body)
 
     /// Whether the label spans multiple lines.
+    ///
+    /// When enabled, the text of the label will try to fit within the ``frame``.
+    ///
+    /// > Important: To guarantee that the text is displayed, ensure that your label's ``frame`` is correctly set with
+    /// appropriate dimensions. Using the content intrinsic size might not allow the text to be properly displayed.
     open var isMultiline: Bool = true
 
     /// The alignment of the text in the label.
@@ -60,7 +65,8 @@ open class UILabel: UIView {
         }
 
         if isMultiline {
-            Graphics.drawTextInRect(text, in: frame.pdRect, aligned: Graphics.TextAlignment(uiHorizontalAlignment: textAlignment))
+            Graphics.drawTextInRect(
+                text, in: frame.pdRect, aligned: Graphics.TextAlignment(uiHorizontalAlignment: textAlignment))
             return
         }
 
