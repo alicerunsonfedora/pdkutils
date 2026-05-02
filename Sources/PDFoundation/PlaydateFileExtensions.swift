@@ -59,6 +59,17 @@ extension PDFile {
             start: strPointer.assumingMemoryBound(to: UInt8.self), count: bytes)
         return String(decoding: buffer, as: Unicode.UTF8.self)
     }
+
+    /// Write the specified string into the given file.
+    /// - Parameter string: The string to write into the file.
+    /// - Returns: The number of bytes written into the file, or -1 if the operation failed.
+    @discardableResult
+    public func writeString(_ string: String) -> Int {
+        return string.withCString { ptr in
+            let buffer = UnsafeRawBufferPointer(start: ptr, count: string.utf8.count)
+            return (try? write(buffer: buffer)) ?? -1
+        }
+    }
 }
 
 extension String {
@@ -75,6 +86,15 @@ extension String {
         let fileStats = try File.stat(path: filePath)
         let file = try File.open(path: filePath, mode: .read)
         self.init(reading: file, ofLength: Int(fileStats.size))
+        try file.close()
+    }
+
+    /// Writes the current string into a file at the specified path.
+    /// - Parameter path: The path to write the file to.
+    public func write(to path: String) throws(Playdate.Error) {
+        let file = try File.open(path: path, mode: .write)
+        file.writeString(self)
+        try file.close()
     }
 }
 
