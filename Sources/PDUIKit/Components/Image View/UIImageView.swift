@@ -21,6 +21,7 @@ open class UIImageView: UIView {
     }
 
     public override func draw() {
+        if isHidden { return }
         guard let bitmap = image?.pdBitmap else { return }
         if Graphics.drawMode != (image?.drawMode ?? .copy) {
             Graphics.drawMode = image?.drawMode ?? .copy
