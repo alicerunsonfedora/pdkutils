@@ -80,7 +80,7 @@ public extension UIEdgeInsets {
     }
     /// Create a set of edge insets only applicable to the bottom edge.
     /// - Parameter value: The inset from the bottom edge of a rectangle.
-    static func top(_ value: Float) -> Self {
+    static func bottom(_ value: Float) -> Self {
         return UIEdgeInsets(top: 0, leading: 0, trailing: 0, bottom: value)
     }
 }
