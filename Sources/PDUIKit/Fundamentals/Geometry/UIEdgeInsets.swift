@@ -60,6 +60,29 @@ public extension UIEdgeInsets {
     static func vertical(_ value: Float) -> Self {
         return UIEdgeInsets(top: value, leading: 0, trailing: 0, bottom: value)
     }
+    
+    /// Create a set of edge insets only applicable to the top edge.
+    /// - Parameter value: The inset from the top edge of a rectangle.
+    static func top(_ value: Float) -> Self {
+        return UIEdgeInsets(top: value, leading: 0, trailing: 0, bottom: 0)
+    }
+
+    /// Create a set of edge insets only applicable to the leading edge.
+    /// - Parameter value: The inset from the leading edge of a rectangle.
+    static func leading(_ value: Float) -> Self {
+        return UIEdgeInsets(top: 0, leading: value, trailing: 0, bottom: 0)
+    }
+
+    /// Create a set of edge insets only applicable to the trailing edge.
+    /// - Parameter value: The inset from the trailing edge of a rectangle.
+    static func trailing(_ value: Float) -> Self {
+        return UIEdgeInsets(top: 0, leading: 0, trailing: value, bottom: 0)
+    }
+    /// Create a set of edge insets only applicable to the bottom edge.
+    /// - Parameter value: The inset from the bottom edge of a rectangle.
+    static func top(_ value: Float) -> Self {
+        return UIEdgeInsets(top: 0, leading: 0, trailing: 0, bottom: value)
+    }
 }
 
 public extension UIRect {
