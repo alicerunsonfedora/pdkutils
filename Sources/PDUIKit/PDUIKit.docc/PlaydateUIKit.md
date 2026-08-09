@@ -32,7 +32,12 @@ similar feel to Apple's UIKit library for iOS, iPadOS, and tvOS.
 - ``UIFrameCounter``
 
 ### Navigation
+
 - ``UINavigationController``
+
+### Informational views
+
+- ``UIStatusBarView``
 
 ### Handling user input and focus
 
