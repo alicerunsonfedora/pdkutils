@@ -41,7 +41,7 @@ public func PGClipRectToBounds(_ rect: Rect) -> PGBounds {
     if rectMinY > rectMaxY {
         (rectMinY, rectMaxY) = (rectMaxY, rectMinY)
     }
-    if rectMaxY >= PGDisplayHeight {
+    if rectMaxY > PGDisplayHeight {
         rectMaxY = PGDisplayHeight - 1
     }
 
