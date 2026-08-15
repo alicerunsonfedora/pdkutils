@@ -4,7 +4,9 @@ import PDFoundation
 public struct UIStatusBarItem: Sendable {
     /// An enumeration of the available icons for a status bar item.
     public enum Icon: Sendable {
-        case directionPad, crank, buttonB, buttonA, directionPadAndCrank
+        case crank, buttonB, buttonA, menu, lock
+        
+        case directionPad, directionPadAndCrank, directionPadLeft, directionPadRight, directionPadUp, directionPadDown
 
         var text: String {
             switch self {
@@ -13,6 +15,12 @@ public struct UIStatusBarItem: Sendable {
             case .buttonA: "Ⓐ"
             case .buttonB: "Ⓑ"
             case .directionPadAndCrank: "✛/🎣"
+            case .menu: "⊙"
+            case .lock: "🔒"
+            case .directionPadLeft: "⬅️"
+            case .directionPadRight: "➡️"
+            case .directionPadUp: "⬆️"
+            case .directionPadDown: "⬇️"
             }
         }
     }
@@ -43,4 +51,10 @@ public extension UIStatusBarItem {
     
     /// The standard status bar action for moving within a grid or layout.
     static let move = UIStatusBarItem(action: "MOVE", icon: .directionPad)
+    
+    /// The standard status bar action for invoking the system menu.
+    static let menu = UIStatusBarItem(action: "MENU", icon: .menu)
+    
+    /// The standard status bar action for locking the Playdate.
+    static let lock = UIStatusBarItem(action: "LOCK", icon: .lock)
 }
