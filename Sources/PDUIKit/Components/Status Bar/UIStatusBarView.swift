@@ -1,4 +1,5 @@
 import PDFoundation
+import PDGraphics
 import PlaydateKit
 
 /// A view that displays a small status bar.
@@ -37,14 +38,12 @@ public final class UIStatusBarView: UIView {
     private lazy var leftContentLabel: UILabel = {
         let label = UILabel(frame: self.frame.inset(by: Constants.contentLabelInset))
         label.font = .preferredSystemFont(for: .caption)
-        label.textColor = .white
         return label
     }()
 
     private lazy var rightContentLabel: UILabel = {
         let label = UILabel(frame: self.frame.inset(by: Constants.contentLabelInset))
         label.font = .preferredSystemFont(for: .caption)
-        label.textColor = .white
         label.textAlignment = .trailing
         return label
     }()
@@ -59,8 +58,26 @@ public final class UIStatusBarView: UIView {
             )
         )
         self.backgroundColor = .black
-        addSubview(leftContentLabel)
-        addSubview(rightContentLabel)
+    }
+    
+    public override func draw() {
+        Graphics.drawMode = .copy
+        PGFillRect(frame.pdRect, color: backgroundColor)
+
+        // NOTE(marquiskurt): Manually overriding here since PDUIKit doesn't support an inverted draw mode for the
+        // toolbar as of yet. (Should it be supported?)
+        Graphics.drawMode = .inverted
+        Graphics.drawTextInRect(
+            leftContentLabel.text ?? "",
+            in: self.frame.inset(by: Constants.contentLabelInset),
+            font: .preferredSystemFont(for: .caption),
+            aligned: .left)
+        Graphics.drawTextInRect(
+            rightContentLabel.text ?? "",
+            in: self.frame.inset(by: Constants.contentLabelInset),
+            font: .preferredSystemFont(for: .caption),
+            aligned: .right)
+        Graphics.drawMode = .copy
     }
 
     private func didSetLeadingBarItems() {
