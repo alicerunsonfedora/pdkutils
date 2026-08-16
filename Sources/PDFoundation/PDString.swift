@@ -141,7 +141,3 @@ public extension String {
         self = pdString.string
     }
 }
-
-public func print(_ contents: PDString) {
-    print(contents.string)
-}
