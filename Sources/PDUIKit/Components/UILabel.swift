@@ -9,12 +9,12 @@ open class UILabel: UIView {
         guard let pdFont = font?.pdFont, let text else { return super.contentIntrinsicSize }
         if isMultiline { return super.contentIntrinsicSize }
 
-        let textWidth = pdFont.getTextWidth(for: text, tracking: 0)
+        let textWidth = pdFont.getTextWidth(for: text.string, tracking: 0)
         return UISize(width: Float(textWidth), height: Float(pdFont.height))
     }
 
     /// The text that is presented in the label.
-    open var text: String?
+    open var text: PDString?
 
     /// The font the label uses to render the text.
     open var font: UIFont? = .preferredSystemFont(for: .body)
@@ -40,7 +40,7 @@ open class UILabel: UIView {
     /// Create a label.
     /// - Parameter text: The text contents of the label.
     /// - Parameter frame: The frame that the text is rendered in.
-    public init(text: String? = nil, frame: UIRect = .zero) {
+    public init(text: PDString? = nil, frame: UIRect = .zero) {
         self.text = text
         super.init(frame: frame)
     }
@@ -80,7 +80,7 @@ open class UILabel: UIView {
                 )
             }
             Graphics.drawTextInRect(
-                text, in: frame.pdRect, aligned: Graphics.TextAlignment(uiHorizontalAlignment: textAlignment))
+                text.string, in: frame.pdRect, aligned: Graphics.TextAlignment(uiHorizontalAlignment: textAlignment))
             return
         }
 
@@ -105,13 +105,13 @@ open class UILabel: UIView {
 
         switch textAlignment {
         case .leading:
-            Graphics.drawText(text, at: topPoint)
+            Graphics.drawText(text.string, at: topPoint)
         case .center:
             let widthOffset = contentIntrinsicSize.width / 2
             let heightOffset = contentIntrinsicSize.height / 2
-            Graphics.drawText(text, at: topPoint.translatedBy(dx: -widthOffset, dy: -heightOffset))
+            Graphics.drawText(text.string, at: topPoint.translatedBy(dx: -widthOffset, dy: -heightOffset))
         case .trailing:
-            Graphics.drawText(text, at: topPoint.translatedBy(dx: -contentIntrinsicSize.width, dy: 0))
+            Graphics.drawText(text.string, at: topPoint.translatedBy(dx: -contentIntrinsicSize.width, dy: 0))
         }
 
         Graphics.drawMode = .copy

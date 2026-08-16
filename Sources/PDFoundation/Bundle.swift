@@ -18,14 +18,14 @@ public enum BundleAccessError: Error {
 
 /// An object that represents a game's bundle.
 public final class Bundle {
-    var resourcesBase: String
+    var resourcesBase: PDString
 
     /// Create a bundle relative to a given path for a specific name.
     ///
     /// Use this initializer when creating a bundle that is intended to be separated from the ``main`` bundle.
     /// - Parameter name: The name of the bundle.
     /// - Parameter path: The relative path of the bundle.
-    public init(named name: String, path: String? = nil) {
+    public init(named name: PDString, path: PDString? = nil) {
         if let path {
             resourcesBase = "\(path)/\(name).pdbundle/Resources"
         } else {
@@ -35,7 +35,7 @@ public final class Bundle {
 
     /// Create a game bundle relative to a given path.
     /// - Parameter path: The relative path of the bundle.
-    init(path: String? = nil) {
+    init(path: PDString? = nil) {
         if let path {
             resourcesBase = "\(path)/Resources"
         } else {
@@ -46,8 +46,8 @@ public final class Bundle {
     /// Retrieve the file system path for a given resource in the bundle.
     /// - Parameter resource: The name of the resource to locate.
     /// - Parameter resourceType: The type of resource to locate.
-    public func path(forResource resource: String, ofType resourceType: some BundleResourceType) -> String? {
-        let resPath = resourcesBase + resourceType.subpath(name: resource)
+    public func path(forResource resource: PDString, ofType resourceType: some BundleResourceType) -> PDString? {
+        let resPath = resourcesBase + resourceType.subpath(pdName: resource)
         if !resourceType.requiresFileExtension {
             return resPath
         }
@@ -68,12 +68,12 @@ extension Bundle {
 
     /// Retrieves an image resource of a specified name.
     /// - Parameter name: The name of the image resource to retrieve.
-    public func image(forResourceNamed name: String) throws(BundleAccessError) -> Graphics.Bitmap {
+    public func image(forResourceNamed name: PDString) throws(BundleAccessError) -> Graphics.Bitmap {
         guard let path = path(forResource: name, ofType: .image) else {
             throw .noSuchFileExists
         }
         do {
-            return try Graphics.Bitmap(path: path)
+            return try Graphics.Bitmap(path: path.string)
         } catch {
             throw .readError(error)
         }
@@ -81,12 +81,12 @@ extension Bundle {
 
     /// Retrieves a font resource of a specified name.
     /// - Parameter name: The name of the font resource to retrieve.
-    public func font(forResourceNamed name: String) throws(BundleAccessError) -> Graphics.Font {
+    public func font(forResourceNamed name: PDString) throws(BundleAccessError) -> Graphics.Font {
         guard let path = path(forResource: name, ofType: .font) else {
             throw .noSuchFileExists
         }
         do {
-            return try Graphics.Font(path: path)
+            return try Graphics.Font(path: path.string)
         } catch {
             throw .readError(error)
         }

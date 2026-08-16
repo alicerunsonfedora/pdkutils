@@ -1,8 +1,9 @@
+import PDFoundation
 import PlaydateKit
 
 extension UIButton {
     struct ButtonModelConfig {
-        var text: String?
+        var text: PDString?
         var image: UIImage?
     }
 
@@ -30,7 +31,7 @@ extension UIButton {
     /// instead.
     /// - Parameter title: The title that will be visible for the specified control state.
     /// - Parameter state: The control state that the image appears for.
-    public func setTitle(_ title: String, for state: UIControl.State) {
+    public func setTitle(_ title: PDString, for state: UIControl.State) {
         var configuration = ButtonModelConfig(text: title, image: nil)
         if let existingConfig = buttonConfigurations[state] {
             configuration.image = existingConfig.image

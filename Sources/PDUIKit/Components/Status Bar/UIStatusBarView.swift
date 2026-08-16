@@ -81,7 +81,7 @@ public final class UIStatusBarView: UIView {
     }
 
     private func didSetLeadingBarItems() {
-        var text = ""
+        var text: PDString = ""
         for item in leadingBarItems {
             text += item.textContent + "    "
         }
@@ -90,7 +90,7 @@ public final class UIStatusBarView: UIView {
     }
 
     private func didSetTrailingBarItems() {
-        var text = ""
+        var text: PDString = ""
         for item in trailingBarItems {
             text += item.textContent + "    "
         }

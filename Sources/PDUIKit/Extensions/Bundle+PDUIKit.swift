@@ -16,7 +16,7 @@ public extension Bundle {
 
     /// Retrieves an image resource from the bundle.
     /// - Parameter name: The name of the image resource to retrieve.
-    func image(forResourceNamed name: String) throws(BundleAccessError) -> UIImage {
+    func image(forResourceNamed name: PDString) throws(BundleAccessError) -> UIImage {
         let realImage: Graphics.Bitmap = try self.image(forResourceNamed: name)
         return UIImage(name: name, bitmap: realImage)
     }

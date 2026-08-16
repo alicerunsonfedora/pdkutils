@@ -1,3 +1,4 @@
+import PDFoundation
 import PlaydateKit
 
 private enum Constants {
@@ -74,7 +75,7 @@ open class UIButton: UIControl {
         setupView()
     }
 
-    public convenience init(title: String, image: UIImage, style: Style, frame: UIRect) {
+    public convenience init(title: PDString, image: UIImage, style: Style, frame: UIRect) {
         self.init(style: style, frame: frame)
         let standardConfig = ButtonModelConfig(text: title, image: image)
         self.buttonConfigurations = [.normal : standardConfig]

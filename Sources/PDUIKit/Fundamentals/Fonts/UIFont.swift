@@ -24,7 +24,7 @@ public struct UIFont {
     }
 
     /// The name of the typeface used in the font.
-    public var fontName: String
+    public var fontName: PDString
 
     /// The size of the font in points.
     public var fontSize: Int
@@ -38,13 +38,13 @@ public struct UIFont {
     /// - Parameter name: The typeface to use.
     /// - Parameter size: The size of the font in points.
     /// - Parameter weight: The font's weight.
-    public init(named name: String, size: Int, weight: Weight = .regular) {
-        let fontResource = [name, weight.resourceSuffix, String(size)].joined(separator: "-")
+    public init(named name: PDString, size: Int, weight: Weight = .regular) {
+        let fontResource = [name.string, weight.resourceSuffix, String(size)].joined(separator: "-")
         fontName = name
         fontSize = size
         fontWeight = weight
         do {
-            pdFont = try Bundle.main.font(forResourceNamed: fontResource)
+            pdFont = try Bundle.main.font(forResourceNamed: PDString(fontResource))
         } catch {
             PDReportError("Failed to instantiate font: \(error)")
         }
@@ -56,7 +56,7 @@ public struct UIFont {
         fontSize = systemFontSize
         fontWeight = systemFontWeight
         do {
-            pdFont = try Bundle.uiKit.font(forResourceNamed: fontResource)
+            pdFont = try Bundle.uiKit.font(forResourceNamed: PDString(fontResource))
         } catch {
             PDReportFatalError("Failed to instantiate system font: \(error)")
         }

@@ -8,7 +8,7 @@ public struct UIStatusBarItem: Sendable {
         
         case directionPad, directionPadAndCrank, directionPadLeft, directionPadRight, directionPadUp, directionPadDown
 
-        var text: String {
+        var text: PDString {
             switch self {
             case .directionPad: "✛"
             case .crank: "🎣"
@@ -26,17 +26,17 @@ public struct UIStatusBarItem: Sendable {
     }
 
     /// The action text that appears in the item.
-    public var action: String
+    public var action: PDString
 
     /// The corresponding icon to associate with the action.
     public var icon: Icon
 
-    public init(action: String, icon: Icon) {
+    public init(action: PDString, icon: Icon) {
         self.action = action
         self.icon = icon
     }
 
-    var textContent: String { icon.text + "  " + action }
+    var textContent: PDString { icon.text + "  " + action }
 }
 
 public extension UIStatusBarItem {

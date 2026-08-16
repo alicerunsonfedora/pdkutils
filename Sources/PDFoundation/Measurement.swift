@@ -32,7 +32,7 @@ public class Measurement {
     }
 
     var absoluteTimeStarted: Float
-    var description: String
+    var description: PDString
     var outputFormat: OutputFormat
     let precision: DurationPrecision
     var timeStarted: Float
@@ -48,7 +48,7 @@ public class Measurement {
     /// - Parameter precision: The precision of time to display in the results.
     /// - Parameter outputFormat: The format for the output when recorded.
     public init(
-        _ comment: String,
+        _ comment: PDString,
         in precision: DurationPrecision = .seconds,
         outputFormat: OutputFormat = .prettyPrinted
     ) {
