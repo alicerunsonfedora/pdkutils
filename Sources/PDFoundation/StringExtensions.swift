@@ -9,7 +9,7 @@
 // Embedded Swift for varying reasons. So, we need to redirect the content to use the UTF-8 view instead of the raw
 // content.
 
-extension String: @retroactive Equatable, Hashable {
+extension String {
     /// Whether the string has no content.
     public var isEmpty: Bool { utf8.isEmpty }
 
@@ -70,8 +70,43 @@ extension String: @retroactive Equatable, Hashable {
     }
 }
 
+extension String.UTF8View: @retroactive Equatable, @retroactive Hashable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.elementsEqual(rhs)
+    }
+    public static func == (lhs: String, rhs: Self) -> Bool { lhs.utf8 == rhs }
+    public static func == (lhs: Self, rhs: String) -> Bool { lhs == rhs.utf8 }
+
+    public static func ~= (lhs: Self, rhs: Self) -> Bool { lhs == rhs }
+    public static func ~= (lhs: String, rhs: Self) -> Bool { lhs.utf8 == rhs }
+    public static func ~= (lhs: Self, rhs: String) -> Bool { lhs == rhs.utf8 }
+
+    public func hasPrefix(_ prefix: Self) -> Bool { self.starts(with: prefix) }
+    public func hasPrefix(_ prefix: String) -> Bool { self.starts(with: prefix.utf8) }
+
+    public func hasSuffix(_ suffix: Self) -> Bool {
+        guard suffix.count <= self.count else { return false }
+        return self.dropFirst(self.count - suffix.count).elementsEqual(suffix)
+    }
+    public func hasSuffix(_ suffix: String) -> Bool { hasSuffix(suffix.utf8) }
+
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(0xFF as UInt8)
+        for element in self {
+            hasher.combine(element)
+        }
+    }
+
+    public var hashValue: Int {
+        var hasher = Hasher()
+        self.hash(into: &hasher)
+        return hasher.finalize()
+    }
+}
+
 public extension Array where Element == String {
     func firstIndex(of value: String) -> Index? {
         self.firstIndex { $0.equals(value) }
     }
 }
+
