@@ -39,7 +39,7 @@ public class ISO8601DateFormatter {
 
     /// Creates a string by formatting a given date time.
     /// - Parameter date: The date to format.
-    public func string(from date: Date) -> PDString {
+    public func string(from date: Date) -> String {
         let monthString = NSPrependingZero(value: date.month)
         let dayString = NSPrependingZero(value: date.day)
 
@@ -60,7 +60,7 @@ public class ISO8601DateFormatter {
             let signifier = offset >= 0 ? "+" : "-"
             dateString += "\(signifier)\(offsetString):00"
         }
-        return PDString(dateString)
+        return dateString
     }
 }
 

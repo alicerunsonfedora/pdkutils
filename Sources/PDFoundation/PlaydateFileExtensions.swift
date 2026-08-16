@@ -33,10 +33,6 @@ extension File {
             return false
         }
     }
-    
-    public static func fileExists(at path: PDString) -> Bool {
-        self.fileExists(at: path.string)
-    }
 }
 
 extension PDFile {
@@ -64,12 +60,6 @@ extension PDFile {
         return String(decoding: buffer, as: Unicode.UTF8.self)
     }
 
-    /// Reads the next specified number of bytes as a PDString.
-    /// - Parameter bytes: The number of bytes to interpret as a string.
-    public func readString(ofLength bytes: Int) -> PDString {
-        PDString(readString(ofLength: bytes))
-    }
-
     /// Write the specified string into the given file.
     /// - Parameter string: The string to write into the file.
     /// - Returns: The number of bytes written into the file, or -1 if the operation failed.
@@ -79,40 +69,6 @@ extension PDFile {
             let buffer = UnsafeRawBufferPointer(start: ptr, count: string.utf8.count)
             return (try? write(buffer: buffer)) ?? -1
         }
-    }
-
-    /// Write the specified string into the given file.
-    /// - Parameter string: The string to write into the file.
-    /// - Returns: The number of bytes written into the file, or -1 if the operation failed.
-    @discardableResult
-    public func writeString(_ string: PDString) -> Int {
-        return writeString(string.string)
-    }
-}
-
-extension PDString {
-    /// Initialize a string by reading data from a file as UTF-8.
-    /// - Parameter file: The file to read the string contents from.
-    /// - Parameter length: The number of bytes to read as a string.
-    public init(reading file: PDFile, ofLength length: Int) {
-        self = file.readString(ofLength: length)
-    }
-
-    /// Initialize a string by reading an entire file as a UTF-8 string.
-    /// - Parameter filePath: The path to the file to read.
-    public init(contentsOf filePath: PDString) throws(Playdate.Error) {
-        let fileStats = try File.stat(path: filePath.string)
-        let file = try File.open(path: filePath.string, mode: .read)
-        self.init(reading: file, ofLength: Int(fileStats.size))
-        try file.close()
-    }
-
-    /// Writes the current string into a file at the specified path.
-    /// - Parameter path: The path to write the file to.
-    public func write(to path: PDString) throws(Playdate.Error) {
-        let file = try File.open(path: path.string, mode: .write)
-        file.writeString(self)
-        try file.close()
     }
 }
 
@@ -146,7 +102,7 @@ extension Character {
     /// Initialize a character by reading data from a file as UTF-8.
     /// - Parameter file: The file to read the character from.
     public init?(reading file: PDFile) {
-        let text: String = file.readString(ofLength: 1)
+        let text = file.readString(ofLength: 1)
         guard let char = text.first else { return nil }
         self = char
     }

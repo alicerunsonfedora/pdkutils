@@ -1,13 +1,12 @@
-import PDFoundation
 
 extension UIWheelKeyboard.KeySet {
-    var keys: [PDString] {
+    var keys: [String] {
         switch self {
         case let .alphanumeric(includeCapitalization):
-            let latinAlphabet: [PDString] = [
+            let latinAlphabet = [
                 "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t",
                 "u", "v", "w", "x", "y", "z"]
-            let latinUppercasedAlphabet: [PDString] = [
+            let latinUppercasedAlphabet = [
                 "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
                 "U", "V", "W", "X", "Y", "Z"]  
             var keys = latinAlphabet

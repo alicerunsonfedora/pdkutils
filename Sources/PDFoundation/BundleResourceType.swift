@@ -19,12 +19,6 @@ public protocol BundleResourceType {
     func subpath(name: String) -> String
 }
 
-public extension BundleResourceType {
-    func subpath(pdName: PDString) -> PDString {
-        PDString(self.subpath(name: pdName.string))
-    }
-}
-
 /// A resource type that describes image data.
 public struct ImageResourceType: BundleResourceType {
     public var requiresFileExtension: Bool { false }

@@ -7,7 +7,7 @@ public class UIImage {
     ///
     /// For a standard image, this corresponds to the image's name in the `Resources/Images` directory. For symbols,
     /// this corresponds to the symbol's name.
-    public var name: PDString
+    public var name: String
 
     /// The intrinsic content size of the image.
     public var contentIntrinsicSize: UISize {
@@ -22,7 +22,7 @@ public class UIImage {
     /// Construct an image of a given name.
     /// - Parameter name: The name of the image as it exists in the specified bundle.
     /// - Parameter bundle: The bundle containing the image resource to display.
-    public init(name: PDString, bundle: Bundle = .main) {
+    public init(name: String, bundle: Bundle = .main) {
         self.name = name
         self.pdBitmap = try? bundle.image(forResourceNamed: name)
     }
@@ -30,7 +30,7 @@ public class UIImage {
     /// Construct an image from a symbol name according to a specified text style.
     /// - Parameter symbolName: The symbol to create a drawable image out of.
     /// - Parameter textStyle: The preferred text style of the symbol.
-    public init(symbolName: PDString, textStyle: UIFont.TextStyle = .body) {
+    public init(symbolName: String, textStyle: UIFont.TextStyle = .body) {
         self.name = symbolName
 
         guard let idx = Self.symbolOrder.firstIndex(of: symbolName) else {
@@ -45,7 +45,7 @@ public class UIImage {
         self.pdBitmap = symbolTable.bitmap(at: idx)?.copy()
     }
 
-    init(name: PDString, bitmap: Graphics.Bitmap?) {
+    init(name: String, bitmap: Graphics.Bitmap?) {
         self.name = name
         self.pdBitmap = bitmap
     }
@@ -59,7 +59,7 @@ public class UIImage {
 }
 
 extension UIImage {
-    static let symbolOrder: [PDString] = [
+    static let symbolOrder = [
         "checkmark",
         "checkmark.circle",
         "checkmark.circle.fill",

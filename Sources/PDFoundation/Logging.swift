@@ -25,9 +25,9 @@ public struct OSLog {
     public var logLevel: LogLevel = .warningsAndErrors
 
     /// The subsystem associated with this log.
-    public let subsystem: PDString?
+    public let subsystem: String?
 
-    var subsystemComponent: PDString {
+    var subsystemComponent: String {
         if let subsystem {
             "(sub: \(subsystem)) "
         } else {
@@ -37,7 +37,7 @@ public struct OSLog {
 
     /// Create a logger for a given subsystem.
     /// - Parameter subsystem: The subsystem that the logger is associated with.
-    public init(subsystem: PDString? = nil) {
+    public init(subsystem: String? = nil) {
         displaysTimestamp = true
         logLevel = .warningsAndErrors
         self.subsystem = subsystem
@@ -119,7 +119,7 @@ public func PDReportFatalError(_ message: String, displayTimestamp: Bool = true)
     System.error("[FATAL] (\(formattedString)): \(message)")
 }
 
-func RFGetCurrentFormattedDate() -> PDString {
+func RFGetCurrentFormattedDate() -> String {
     let dateTime = Date.now
     let formatter = ISO8601DateFormatter()
     return formatter.string(from: dateTime)

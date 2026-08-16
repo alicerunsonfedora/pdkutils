@@ -1,4 +1,3 @@
-import PDFoundation
 
 /// A delegate that listens for events emitted by a ``UITextField``.
 public protocol UITextFieldDelegate: AnyObject {
@@ -8,10 +7,6 @@ public protocol UITextFieldDelegate: AnyObject {
     func textField(_ textField: UITextField, editingChangedText newText: String?)
 }
 
-
 public extension UITextFieldDelegate {
-    func textField(_ textField: UITextField, editingChangedText newText: PDString?) {
-        self.textField(textField, editingChangedText: newText?.string)
-    }
     func textField(_ textField: UITextField, editingChangedText newText: String?) {}
 }

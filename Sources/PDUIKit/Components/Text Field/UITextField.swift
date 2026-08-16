@@ -36,7 +36,7 @@ open class UITextField: UIControl {
     ///
     /// This should be used whenever possible to describe the purpose of the text field, if the context is not clearly
     /// evident.
-    public var helperText: PDString? {
+    public var helperText: String? {
         didSet {
             helperTextLabel.text = helperText
             helperTextLabel.isHidden = (helperText == nil)
@@ -45,7 +45,7 @@ open class UITextField: UIControl {
     }
 
     /// The text contents of the text field.
-    public var text: PDString? {
+    public var text: String? {
         didSet { setNeedsDraw() }
     }
 

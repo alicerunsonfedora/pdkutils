@@ -30,7 +30,3 @@ leveraging the Playdate SDK.
 ### Measuring Performance
 
 - ``Measurement``
-
-### Wrapper Types
-
-- ``PDString``

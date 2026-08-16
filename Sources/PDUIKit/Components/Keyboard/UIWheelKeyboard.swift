@@ -1,10 +1,9 @@
-import PDFoundation
 import PlaydateKit
 
 /// An enumeration of the the key codes supported by a ``UIWheelKeyboard``.
 public enum UIWheelKeyboardCode {
     /// An individual character or character cluster.
-    case character(PDString)
+    case character(String)
 
     /// The delete key.
     case delete
@@ -18,7 +17,7 @@ public class UIWheelKeyboard: UIView {
         case alphanumeric(includeCapitalization: Bool)
 
         /// A custom key set with a given font.
-        case custom(keys: [PDString], font: UIFont)
+        case custom(keys: [String], font: UIFont)
     }
 
     private enum Direction {
